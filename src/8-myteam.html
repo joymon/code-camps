@@ -1,0 +1,87 @@
+﻿<section>
+    <img src="images/logo/{{team.Code}}.png" alt="" />
+    <div>
+        <div>{{team.Location}} {{team.Team}}</div>
+        <div>{{team.Lg}} {{team.Div}} with a record of {{team.W}}-{{team.L}}</div>
+        <div>Playing in {{team.Stadium}}, {{distance(team,'M') | number:0}} miles from home</div>
+        <img src="images/stadium/{{team.Code}}.jpg" alt="" />
+    </div>
+</section>
+<h3>Pitchers</h3>
+<ul id="player">
+    <li ng-repeat="player in players | orderBy:'-Age'"
+        ng-if="player.Code==team.Code && player.Pos.indexOf('P')>-1">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
+<h2>Catchers</h2>
+<ul id="player">
+    <li ng-repeat="player in players | orderBy:'-Age'"
+        ng-if="player.Code==team.Code && player.Pos=='C'">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
+<h2>Infield</h2>
+<ul id="player">
+    <li ng-repeat="player in players | filter:{Code:team.Code} | filter:infield | orderBy:'-Age'">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
+<h2>Outfield</h2>
+<ul id="player">
+    <li ng-repeat="player in players | orderBy:'-Age'"
+        ng-if="player.Code==team.Code && player.Pos.indexOf('F')>-1">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
+<h2>Designated Hitter</h2>
+<ul id="player">
+    <li ng-repeat="player in players | filter:{Pos:'DH'} | filter:{Code:team.Code}">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
