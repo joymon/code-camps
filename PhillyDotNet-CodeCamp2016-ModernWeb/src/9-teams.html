@@ -1,0 +1,13 @@
+﻿            <!--teams views-->
+<ul id="team">
+    <li ng-repeat="team in teams" ng-click="setFave(team)"
+        ng-class="{'fave':team.Code==fave}">
+        <div class="league">{{team.Lg}}</div>
+        <div class="division">{{team.Div}}</div>
+        <div class="code"><img src="images/logo/{{team.Code}}.png" alt="" onclick="" height="60" width="60" /></div>
+        <fa ng-show="team.Code==fave" name="thumbs-o-up" size="2"></fa>
+        <div class="location">{{team.Location}}</div>
+        <div class="team">{{team.Team}}</div>
+        <div class="stadium">{{team.Stadium}}</div>
+    </li>
+</ul>

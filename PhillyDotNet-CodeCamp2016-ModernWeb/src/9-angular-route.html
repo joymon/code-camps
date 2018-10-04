@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>MLB Teams</title>
+    <meta charset="utf-8" />
+
+    <link href="images/mlb.png" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="style/angular-datatables.min.css" rel="stylesheet" />
+    <link href="style/angular-chart.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="style/9-site.css" rel="stylesheet" />
+
+    <script src="script/jquery.min.js"></script>
+    <script src="script/jquery.dataTables.min.js"></script>
+    <script src="script/chart.min.js"></script>
+    <script src="script/angular.min.js"></script>
+    <script src="script/angular-route.js"></script>
+    <script src="script/angular-datatables.js"></script>
+    <script src="script/angular-chart.min.js"></script>
+    <script src="script/angular-fontawesome.js"></script>
+    <script src="script/9-app.js"></script>
+    <script src="script/9-controllers.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <header>
+        <img src="images/mlb.png" />
+        <div>Major League Baseball</div>
+        <div>2016</div>
+    </header>
+    <section>
+        <nav>
+            <a href="#/myteam">My Team</a>
+            <a href="#/teams">Teams</a>
+            <a href="#/players">Players</a>
+            <a href="#/capacity">Capacity</a>
+            <a href="#/pick">Pick Players</a>
+        </nav>
+        <content ng-view></content>
+    </section>
+    <footer>
+        <div>philly.NET Modern Web by Design</div>
+    </footer>
+
+</body>
+</html>

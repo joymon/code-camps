@@ -1,0 +1,35 @@
+﻿            <!--players view-->
+<div>
+    <table datatable="players" class="row-border hover">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Pos</th>
+                <th>Bat</th>
+                <th>Thr</th>
+                <th>Age</th>
+                <th>Ht</th>
+                <th>Wt</th>
+                <th>Birthplace</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="player in players">
+                <td>{{::player.Code}}</td>
+                <td>{{::player.Nbr}}</td>
+                <td>{{::player.Name}}</td>
+                <td>{{::player.Pos}}</td>
+                <td>{{::player.Bat}}</td>
+                <td>{{::player.Throw}}</td>
+                <td>{{::player.Age}}</td>
+                <td>{{::player.Height}}</td>
+                <td>{{::player.Weight}}</td>
+                <td>{{::player.Birthplace}}</td>
+                <td>{{::player.Salary}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

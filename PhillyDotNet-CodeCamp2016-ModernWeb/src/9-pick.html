@@ -1,0 +1,29 @@
+﻿            <!--pick players views-->
+<ul id="player">
+    <li class="header">
+        <div>#</div>
+        <div class="name">Name</div>
+        <div>Pos</div>
+        <div>Bat</div>
+        <div>Throw</div>
+        <div>Age</div>
+        <div>Height</div>
+        <div>Weight</div>
+        <div class="birthplace">Birthplace</div>
+        <div class="salary">$alary</div>
+    </li>
+    <li ng-repeat="player in players"
+        ng-class="{'fave':player.Code==fave}">
+        <div>{{player.Nbr}}</div>
+        <div class="name">{{player.Name}}</div>
+        <div>{{player.Pos}}</div>
+        <div>{{player.Bat}}</div>
+        <div>{{player.Throw}}</div>
+        <div>{{player.Age}}</div>
+        <div>{{player.Height}}</div>
+        <div>{{player.Weight}}</div>
+        <div class="birthplace">{{player.Birthplace}}</div>
+        <div class="salary">{{player.Salary}}</div>
+    </li>
+</ul>
+

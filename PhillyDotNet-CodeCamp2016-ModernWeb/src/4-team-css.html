@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>MLB Teams</title>
+    <meta charset="utf-8" />
+
+    <script src="script/jquery.min.js"></script>
+
+    <!--grid layout-->
+    <style>
+        html {
+            font-family: Calibri;
+            font-size: large;
+        }
+
+        #team {
+            margin:0;
+            padding:0;
+        }
+
+        #team li {
+            list-style: none;
+            border: .01rem solid blue;
+            display: flex;
+            /*flex-direction:row-reverse;*/
+            justify-content: center;
+            align-items: center;
+        }
+
+        #team div.league, #team div.division, #team div.code, #team div.location, #team div.team, #team div.stadium {
+            padding: .2rem;
+            text-align: center;
+        }
+
+        #team div.league {
+            width: 2rem;
+        }
+
+        #team div.division {
+            width: 3rem;
+        }
+
+        #team div.code {
+            /*order: -1;*/
+        }
+
+        #team div.location {
+            width: 8rem;
+        }
+
+        #team div.team {
+            width: 8rem;
+            font-weight: 700;
+        }
+
+        #team div.stadium {
+            flex-grow: 2;
+        }
+
+        header, footer, nav {
+            color: white;
+            background-color: blue;
+            padding: 0 .5rem;
+        }
+    </style>
+
+    <!--page layout-->
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        header {
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer {
+            height: 1.5rem;
+            font-size: smaller;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section {
+            height: calc(100vh - 5.5rem);
+            display: flex;
+            margin:0;
+        }
+
+        nav {
+            min-width: 10rem;
+            display: flex;
+            align-items: center;
+            flex-flow: column nowrap;
+            flex:0 0 auto;
+        }
+
+            nav button {
+                width: 7rem;
+                margin-bottom: 1rem;
+                border-radius: .2rem;
+            }
+
+        content {
+            height: 100%;
+            overflow-y: auto;
+            flex:3 0 auto;
+        }
+    </style>
+
+    <!--row colors and favorite highlight-->
+    <style>
+        #team li:nth-child(even) {
+            background-color: #A7C942;
+            color: #fff;
+        }
+
+        #team li:nth-child(odd) {
+            color: #000;
+            background-color: #EAF2D3;
+        }
+
+        #team div.code {
+            cursor: pointer;
+        }
+
+        /*#team li[id=nyy] {
+            background-color: orangered;
+        }*/
+
+        .fave {
+            background-color: orangered !important;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <img src="images/mlb.png" />
+        <div>Major League Baseball</div>
+        <div>2016</div>
+    </header>
+    <section>
+        <nav>
+            <button>My Team</button>
+            <button>Teams</button>
+            <button>Players</button>
+            <button>Capacity</button>
+        </nav>
+        <content>
+            <!--ul#team>li#id$*30>div.league+div.division+(div.code>img[onclick][height="60"][width="60"])+div.location+div.team+div.stadium-->
+            <ul id="team">
+                <li id="bal" team="bal">
+                    <div class="league">AL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/bal.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Baltimore</div>
+                    <div class="team">Orioles</div>
+                    <div class="stadium">Camden Yards</div>
+                </li>
+                <li id="bos" team="bos">
+                    <div class="league">AL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/bos.png" alt="" onclick="setFave('bos')" height="60" width="60" /></div>
+                    <div class="location">Boston</div>
+                    <div class="team">Red Sox</div>
+                    <div class="stadium">Fenway Park</div>
+                </li>
+                <li id="nyy" team="nyy">
+                    <div class="league">AL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/nyy.png" alt="" onclick="setFave('nyy')" height="60" width="60" /></div>
+                    <div class="location">New York</div>
+                    <div class="team">Yankees</div>
+                    <div class="stadium">Yankee Stadium</div>
+                </li>
+                <li id="tb" team="tb">
+                    <div class="league">AL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/tb.png" alt="" onclick="setFave('tb')" height="60" width="60" /></div>
+                    <div class="location">Tampa Bay</div>
+                    <div class="team">Rays</div>
+                    <div class="stadium">Tropicana Field</div>
+                </li>
+                <li id="tor" team="tor">
+                    <div class="league">AL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/tor.png" alt="" onclick="setFave('tor')" height="60" width="60" /></div>
+                    <div class="location">Toronto</div>
+                    <div class="team">Blue Jays</div>
+                    <div class="stadium">Rogers Centre</div>
+                </li>
+                <li id="chw">
+                    <div class="league">AL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/chw.png" alt="" onclick="setFave('chw')" height="60" width="60" /></div>
+                    <div class="location">Chicago</div>
+                    <div class="team">White Sox</div>
+                    <div class="stadium">U.S. Cellular Field</div>
+                </li>
+                <li id="cle">
+                    <div class="league">AL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/cle.png" alt="" onclick="setFave('cle')" height="60" width="60" /></div>
+                    <div class="location">Cleveland</div>
+                    <div class="team">Indians</div>
+                    <div class="stadium">Progressive Field</div>
+                </li>
+                <li id="det">
+                    <div class="league">AL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/det.png" alt="" onclick="setFave('det')" height="60" width="60" /></div>
+                    <div class="location">Detroit</div>
+                    <div class="team">Tigers</div>
+                    <div class="stadium">Comerica Park</div>
+                </li>
+                <li id="kc">
+                    <div class="league">AL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/kc.png" alt="" onclick="setFave('kc')" height="60" width="60" /></div>
+                    <div class="location">Kansas City</div>
+                    <div class="team">Royals</div>
+                    <div class="stadium">Kauffman Stadium</div>
+                </li>
+                <li id="min">
+                    <div class="league">AL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/min.png" alt="" onclick="setFave('min')" height="60" width="60" /></div>
+                    <div class="location">Minnesota</div>
+                    <div class="team">Twins</div>
+                    <div class="stadium">Target Field</div>
+                </li>
+                <li id="hou">
+                    <div class="league">AL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/hou.png" alt="" onclick="setFave('hou')" height="60" width="60" /></div>
+                    <div class="location">Houston</div>
+                    <div class="team">Astros</div>
+                    <div class="stadium">Minute Maid Park</div>
+                </li>
+                <li id="laa">
+                    <div class="league">AL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/laa.png" alt="" onclick="setFave('laa')" height="60" width="60" /></div>
+                    <div class="location">Los Angeles</div>
+                    <div class="team">Angels</div>
+                    <div class="stadium">Angel Stadium of Anaheim</div>
+                </li>
+                <li id="oak">
+                    <div class="league">AL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/oak.png" alt="" onclick="setFave('oak')" height="60" width="60" /></div>
+                    <div class="location">Oakland</div>
+                    <div class="team">Athletics</div>
+                    <div class="stadium">O.co Coliseum</div>
+                </li>
+                <li id="sea">
+                    <div class="league">AL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/sea.png" alt="" onclick="setFave('sea')" height="60" width="60" /></div>
+                    <div class="location">Seattle</div>
+                    <div class="team">Mariners</div>
+                    <div class="stadium">Safeco Field</div>
+                </li>
+                <li id="tex">
+                    <div class="league">AL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/tex.png" alt="" onclick="setFave('tex')" height="60" width="60" /></div>
+                    <div class="location">Texas</div>
+                    <div class="team">Rangers</div>
+                    <div class="stadium">Globe Life Park in Arlington</div>
+                </li>
+                <li id="id16">
+                    <div class="league">NL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/atl.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Atlanta</div>
+                    <div class="team">Braves</div>
+                    <div class="stadium">Turner Field</div>
+                </li>
+                <li id="id17">
+                    <div class="league">NL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/mia.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Miami</div>
+                    <div class="team">Marlins</div>
+                    <div class="stadium">Marlins Park</div>
+                </li>
+                <li id="id18">
+                    <div class="league">NL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/nym.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">New York</div>
+                    <div class="team">Mets</div>
+                    <div class="stadium">Citi Field</div>
+                </li>
+                <li id="id19">
+                    <div class="league">NL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/phi.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Philadelphia</div>
+                    <div class="team">Phillies</div>
+                    <div class="stadium">Citizens Bank Park</div>
+                </li>
+                <li id="id20">
+                    <div class="league">NL</div>
+                    <div class="division">East</div>
+                    <div class="code"><img src="images/logo/wsh.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Washington</div>
+                    <div class="team">Nationals</div>
+                    <div class="stadium">Nationals Park</div>
+                </li>
+                <li id="id21">
+                    <div class="league">NL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/chc.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Chicago</div>
+                    <div class="team">Cubs</div>
+                    <div class="stadium">Wrigley Field</div>
+                </li>
+                <li id="id22">
+                    <div class="league">NL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/cin.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Cincinnati</div>
+                    <div class="team">Reds</div>
+                    <div class="stadium">Great American Ball Park</div>
+                </li>
+                <li id="id23">
+                    <div class="league">NL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/mil.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Milwaukee</div>
+                    <div class="team">Brewers</div>
+                    <div class="stadium">Miller Park</div>
+                </li>
+                <li id="id24">
+                    <div class="league">NL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/pit.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Pittsburgh</div>
+                    <div class="team">Pirates</div>
+                    <div class="stadium">PNC Park</div>
+                </li>
+                <li id="id25">
+                    <div class="league">NL</div>
+                    <div class="division">Central</div>
+                    <div class="code"><img src="images/logo/stl.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">St. Louis</div>
+                    <div class="team">Cardinals</div>
+                    <div class="stadium">Busch Stadium</div>
+                </li>
+                <li id="id26">
+                    <div class="league">NL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/ari.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Arizona</div>
+                    <div class="team">Diamondbacks</div>
+                    <div class="stadium">Chase Field</div>
+                </li>
+                <li id="id27">
+                    <div class="league">NL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/col.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Colorado</div>
+                    <div class="team">Rockies</div>
+                    <div class="stadium">Coors Field</div>
+                </li>
+                <li id="id28">
+                    <div class="league">NL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/laa.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">Los Angeles</div>
+                    <div class="team">Dodgers</div>
+                    <div class="stadium">Dodger Stadium</div>
+                </li>
+                <li id="id29">
+                    <div class="league">NL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/sd.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">San Diego</div>
+                    <div class="team">Padres</div>
+                    <div class="stadium">Petco Park</div>
+                </li>
+                <li id="id30">
+                    <div class="league">NL</div>
+                    <div class="division">West</div>
+                    <div class="code"><img src="images/logo/sf.png" alt="" onclick="setFave('bal')" height="60" width="60" /></div>
+                    <div class="location">San Francisco</div>
+                    <div class="team">Giants</div>
+                    <div class="stadium">AT&T Park</div>
+                </li>
+            </ul>
+        </content>
+    </section>
+    <footer>
+        <div>philly.NET Modern Web by Design</div>
+    </footer>
+
+    <!--jQuery can add or remove classes on a click event-->
+    <script>
+        function setFave(fave) {
+            $("li[id=" + localStorage.getItem("fave") + "]").removeClass("fave");
+            localStorage.setItem("fave", fave);
+            $("li[id=" + fave + "]").addClass("fave");
+            console.log(localStorage.getItem("fave"));
+        }
+    </script>
+
+</body>
+</html>

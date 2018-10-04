@@ -1,0 +1,179 @@
+﻿/* grid layout */
+html {
+    font-family: Calibri;
+    font-size: large;
+}
+
+#team, #player {
+    margin: 0;
+    padding: 0;
+}
+
+    #team li, #player li {
+        list-style: none;
+        border: .01rem solid blue;
+        display: flex;
+        /*flex-direction:row-reverse;*/
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    #player li {
+        border: none;
+        font-size: smaller;
+        justify-content: space-between;
+    }
+
+        #player li div {
+            text-align: center;
+            flex: 1 0 5%;
+        }
+
+            #player li div.name {
+                text-align: left;
+                flex: 1 0 20%;
+            }
+
+            #player li div.birthplace {
+                text-align: left;
+                flex: 1 0 30%;
+            }
+
+            #player li div.salary {
+                text-align: right;
+                flex: 1 0 15%;
+            }
+
+    #team div.league, #team div.division, #team div.code, #team div.location, #team div.team, #team div.stadium {
+        padding: .2rem;
+        text-align: center;
+    }
+
+    #team div.league {
+        width: 2rem;
+    }
+
+    #team div.division {
+        width: 3rem;
+    }
+
+    #team div.code {
+        /*order: -1;*/
+    }
+
+    #team div.location {
+        width: 8rem;
+    }
+
+    #team div.team {
+        width: 8rem;
+        font-weight: 700;
+    }
+
+    #team div.stadium {
+        flex-grow: 2;
+    }
+
+header, footer, nav {
+    color: white;
+    background-color: blue;
+    padding: 0 .5rem;
+}
+
+/* page layout */
+body {
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+header {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer {
+    height: 1.5rem;
+    font-size: smaller;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section {
+    height: calc(100vh - 5.5rem);
+    display: flex;
+    margin: 0;
+}
+
+nav {
+    min-width: 10rem;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    flex: 0 0 auto;
+}
+
+    nav button {
+        width: 7rem;
+        margin-bottom: 1rem;
+        border-radius: .2rem;
+    }
+
+content {
+    height: 100%;
+    overflow-y: auto;
+    flex: 3 0 auto;
+}
+
+myteam {
+    display: flex;
+    flex-flow: column;
+}
+
+    myteam section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-height: 23rem;
+    }
+
+/* row colors and favorite highlight */
+#team li:nth-child(even) {
+    background-color: #A7C942;
+    color: #fff;
+}
+
+#team li:nth-child(odd) {
+    color: #000;
+    background-color: #EAF2D3;
+}
+
+#player li:nth-child(even) {
+    background-color: white;
+}
+
+#player li:nth-child(odd) {
+    background-color: rgba(216, 227, 239, 0.61);
+}
+
+#player li.header {
+    background-color: darkred;
+    color: white;
+    font-weight: 700;
+}
+
+/*#team div.code {
+            cursor: pointer;
+        }*/
+
+/*#team li[id=nyy] {
+            background-color: orangered;
+        }*/
+
+.fave {
+    background-color: orangered !important;
+}
