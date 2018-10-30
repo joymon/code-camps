@@ -1,1 +1,4 @@
 /**/bin/Debug
+/**/*.cache
+/**/obj/Debug
+/**/*.suo
