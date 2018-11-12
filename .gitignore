@@ -2,3 +2,7 @@
 /**/*.cache
 /**/obj/Debug
 /**/*.suo
+/2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/storage.ide-wal
+/2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/storage.ide-shm
+/2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/storage.ide
+/2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/db.lock
