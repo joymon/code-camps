@@ -5,7 +5,7 @@ def remove_html_markup(s):
     out = ""
 
     for c in s:
-        assert not tag
+        #assert not tag
         if c == '<' and not quote:
             tag = True
             print("stripped")
