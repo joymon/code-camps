@@ -11,46 +11,43 @@ namespace lab_01
 {
     class Program
     {
-        static readonly Uri endPointUri = new Uri("");
-        const string primaryKey = "";
+        static readonly Uri endPointUri = new Uri(Secrets.UriToCosmosDBAccount);
+        const string primaryKey = Secrets.Key;
         public static async Task Main(string[] args)
         {
             Console.WriteLine("Started");
             using (DocumentClient client = new DocumentClient(endPointUri, primaryKey))
             {
-                CreateCollectionsAndIndexingPolicies(client);
-                await PopulateUnlimitedCollectionWithData(client);
+                DatabaseAccount account = await client.GetDatabaseAccountAsync();
+                await client.OpenAsync();
+                await CreateDatabase(client);
+                await CreateDefaultCollection(client);
+                bool isSQL = IsSQLAPI(account);
+                await CreateCustomCollectionsAndIndexingPolicies(client);
+                await Populator.PopulateUnlimitedCollectionWithData(client);
             }
-        }
-        private static async Task PopulateUnlimitedCollectionWithData(DocumentClient client)
-        {
-            await client.OpenAsync();
-            Uri collectionLink = UriFactory.CreateDocumentCollectionUri("EntertainmentDatabase", "CustomCollection");
-            var foodInteractions = new Bogus.Faker<PurchaseFoodOrBeverage>()
-            .RuleFor(i => i.type, (fake) => nameof(PurchaseFoodOrBeverage))
-            .RuleFor(i => i.unitPrice, (fake) => Math.Round(fake.Random.Decimal(1.99m, 15.99m)))
-            .RuleFor(i => i.quantity, (fake) => fake.Random.Number(1,5))
-            .RuleFor(i => i.totalPrice, (fake,user) => Math.Round(user.unitPrice * user.quantity,5))
-            .Generate(100);
-            foreach (var interaction in foodInteractions)
-            {
-                ResourceResponse<Document> result = await client.CreateDocumentAsync(collectionLink, interaction);
-                await Console.Out.WriteLineAsync($"Document #{foodInteractions.IndexOf(interaction):000} created.  Id {result.Resource.Id}");
-            }
-            
-            DocumentCollection coll = await client.ReadDocumentCollectionAsync(collectionLink);
-            await Console.Out.WriteLineAsync(coll;
         }
 
-        static async void CreateCollectionsAndIndexingPolicies(DocumentClient client)
+        private static bool IsSQLAPI(DatabaseAccount account)
         {
-            Database targetDB = new Database { Id = "EntertainmentDatabase" };
-            targetDB = await client.CreateDatabaseIfNotExistsAsync(targetDB);
-            Console.WriteLine($"Self link - {targetDB.SelfLink}");
+            //TODO - Check for a simple write and read. The exception will occur if CosmosDB Account is not SQL API. Differentiate the exception and determine the API model.
+            return true;  
+        }
+
+        private async static Task CreateDefaultCollection(DocumentClient client)
+        {
+            Uri databaseLink = UriFactory.CreateDatabaseUri("EntertainmentDatabase");
+            DocumentCollection defaultCollection = new DocumentCollection
+            {
+                Id = "DefaultCollection"
+            };
+            defaultCollection = await client.CreateDocumentCollectionIfNotExistsAsync(databaseLink, defaultCollection);
+            await Console.Out.WriteLineAsync($"Default Collection created. Self-Link:\t{defaultCollection.SelfLink}");
+        }
+
+        static async Task CreateCustomCollectionsAndIndexingPolicies(DocumentClient client)
+        {
             Uri dbLink = UriFactory.CreateDatabaseUri("EntertainmentDatabase");
-            DocumentCollection defColl = new DocumentCollection { Id = "DefaultCollection" };
-            defColl = await client.CreateDocumentCollectionIfNotExistsAsync(dbLink, defColl);
-            Console.WriteLine($"DefaultCollection Self link - {defColl.SelfLink}");
             IndexingPolicy idxPolicy = new IndexingPolicy
             {
                 IndexingMode = IndexingMode.Consistent,
@@ -83,8 +80,14 @@ namespace lab_01
                 OfferThroughput = 1000
             };
             customColl = await client.CreateDocumentCollectionIfNotExistsAsync(dbLink, customColl, requestOptions);
-            Console.Out.WriteLineAsync($"Custom collection created. Self link {customColl.SelfLink}");
+            await Console.Out.WriteLineAsync($"Custom collection {customColl.Id} created. Self link {customColl.SelfLink}");
         }
 
+        private static async Task CreateDatabase(DocumentClient client)
+        {
+            Database targetDB = new Database { Id = "EntertainmentDatabase" };
+            targetDB = await client.CreateDatabaseIfNotExistsAsync(targetDB);
+            Console.WriteLine($"Database {targetDB.Id} created. Self link - {targetDB.SelfLink}");
+        }
     }
 }

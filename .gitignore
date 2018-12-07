@@ -6,3 +6,6 @@
 /2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/storage.ide-shm
 /2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/storage.ide
 /2018/msft-event-cosmodb/lab-02/.vs/lab-02/v15/Server/sqlite3/db.lock
+*.user
+*.dtbcache
+/2018/msft-event-cosmodb/lab-01/.vs/lab-01/v15/Server/sqlite3
