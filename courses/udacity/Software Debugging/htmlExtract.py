@@ -22,3 +22,4 @@ def remove_html_markup(s):
 inp = "<f>'PhillyDotNet-CodeCamp2016-ModernWeb'</f></f>"
 out = remove_html_markup(inp)
 print(out)
+
